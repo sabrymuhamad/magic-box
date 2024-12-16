@@ -1,0 +1,7 @@
+{
+  "name": "Magic Box",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
