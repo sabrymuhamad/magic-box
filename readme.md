@@ -101,6 +101,11 @@ magic-box-app/
 
 ---
 
+## Test Case - Subscribe Form Component (subscribe-form.component.spec.ts)
+- 8 test cases are running successfully using `Jasmine`, simple run `ng test` to start test
+
+---
+
 ## 📝 License
 This project is licensed under the MIT License.
 

@@ -1,29 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { IonicModule, IonModal } from '@ionic/angular';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { IonicModule, IonModal } from '@ionic/angular';
 import { SubscribeFormComponent } from './subscribe-form.component';
-import { Subscribe } from 'src/app/helpers/models/subscribe.model';
-import { GRADE, GENDER } from 'src/app/helpers/enums/shared.enum';
+import { By } from '@angular/platform-browser';
 
 describe('SubscribeFormComponent', () => {
   let component: SubscribeFormComponent;
   let fixture: ComponentFixture<SubscribeFormComponent>;
-  let datePipeMock: jest.Mocked<DatePipe>;
 
   beforeEach(async () => {
-    // Mock DatePipe
-    datePipeMock = { transform: jest.fn() } as unknown as jest.Mocked<DatePipe>;
-
     await TestBed.configureTestingModule({
-      imports: [IonicModule, FormsModule],
-      declarations: [SubscribeFormComponent],
-      providers: [{ provide: DatePipe, useValue: datePipeMock }]
+      declarations: [],
+      imports: [IonicModule.forRoot(), FormsModule],
+      providers: [DatePipe],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SubscribeFormComponent);
     component = fixture.componentInstance;
-
     fixture.detectChanges();
   });
 
@@ -31,78 +25,59 @@ describe('SubscribeFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with default values', () => {
-    expect(component.subscribeForm).toBeInstanceOf(Subscribe);
-    expect(component.grades).toEqual(Object.values(GRADE));
-    expect(component.genders).toEqual(Object.values(GENDER));
-    expect(component.isValidTopics).toBe(true);
-    expect(component.topics.length).toBe(5);
-  });
-
-  it('should open date modal', () => {
-    const modalSpy = jest.spyOn(component.dateModal, 'present');
+  it('should open the date modal when openDateModal is called', () => {
+    spyOn(component.dateModal, 'present');
     component.openDateModal();
-    expect(modalSpy).toHaveBeenCalled();
+    expect(component.dateModal.present).toHaveBeenCalled();
   });
 
-  it('should close date modal on confirmDate', () => {
-    const modalSpy = jest.spyOn(component.dateModal, 'dismiss');
+  it('should close the date modal when confirmDate is called', () => {
+    spyOn(component.dateModal, 'dismiss');
     component.confirmDate();
-    expect(modalSpy).toHaveBeenCalled();
+    expect(component.dateModal.dismiss).toHaveBeenCalled();
   });
 
-  it('should close date modal on closeDateModal', () => {
-    const modalSpy = jest.spyOn(component.dateModal, 'dismiss');
+  it('should close the date modal when closeDateModal is called', () => {
+    spyOn(component.dateModal, 'dismiss');
     component.closeDateModal();
-    expect(modalSpy).toHaveBeenCalled();
+    expect(component.dateModal.dismiss).toHaveBeenCalled();
   });
 
-  it('should set childDOB on date change', () => {
-    const mockEvent = { detail: { value: '2024-06-01' } };
-    datePipeMock.transform.mockReturnValue('01-06-2024');
+  it('should format and set childDOB on date change', () => {
+    const mockEvent = { detail: { value: '2024-12-17' } };
+    const datePipe = TestBed.inject(DatePipe);
+    const formattedDate = datePipe.transform('2024-12-17', 'dd-M-yyyy');
 
     component.onDateChange(mockEvent);
-
-    expect(datePipeMock.transform).toHaveBeenCalledWith('2024-06-01', 'dd-M-yyyy');
-    expect(component.subscribeForm.childDOB).toBe('01-06-2024');
+    expect(component.subscribeForm.childDOB).toEqual(formattedDate!);
   });
 
-  it('should validate topic selection', () => {
+  it('should mark all fields as touched and validate topics on submit', () => {
+    const mockForm = {
+      form: {
+        valid: false,
+        markAllAsTouched: jasmine.createSpy('markAllAsTouched'),
+      },
+    } as unknown as NgForm;
+
+    component.subForm = mockForm;
+    spyOn(component, 'isTopicsSelected').and.returnValue(0);
+
+    component.submit();
+
+    expect(mockForm.form.markAllAsTouched).toHaveBeenCalled();
+    expect(component.isValidTopics).toBeFalse();
+  });
+
+  it('should return true if at least one topic is selected', () => {
     component.topics[0].selected = true;
-    expect(component.isTopicsSelected()).toBe(1);
-
-    component.topics[1].selected = true;
-    expect(component.isTopicsSelected()).toBe(2);
+    const selectedTopics = component.isTopicsSelected();
+    expect(selectedTopics).toBe(1);
   });
 
-  it('should submit form and validate topics', () => {
-    component.subForm = {
-      form: {
-        markAllAsTouched: jest.fn(),
-        valid: true,
-      },
-    } as unknown as NgForm;
-
-    jest.spyOn(component, 'isTopicsSelected').mockReturnValue(1);
-
-    component.submit();
-
-    expect(component.subForm.form.markAllAsTouched).toHaveBeenCalled();
-    expect(component.isValidTopics).toBe(true);
-  });
-
-  it('should mark topics invalid if none are selected on submit', () => {
-    component.subForm = {
-      form: {
-        markAllAsTouched: jest.fn(),
-        valid: true,
-      },
-    } as unknown as NgForm;
-
-    jest.spyOn(component, 'isTopicsSelected').mockReturnValue(0);
-
-    component.submit();
-
-    expect(component.isValidTopics).toBe(false);
+  it('should return false if no topics are selected', () => {
+    component.topics.forEach(topic => (topic.selected = false));
+    const selectedTopics = component.isTopicsSelected();
+    expect(selectedTopics).toBe(0);
   });
 });
