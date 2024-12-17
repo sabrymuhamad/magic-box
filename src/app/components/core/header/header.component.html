@@ -1,0 +1,14 @@
+<div class="mag-bg-primary">
+  <div class="mag-container mag-mx-auto">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button>
+          <img src="assets/images/logo.svg" width="63" alt="Magic Box">
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="mo-text-center mag-hidden">
+        <ng-container *ngIf="pageName$ | async as _PAGE_NAME">{{_PAGE_NAME}}</ng-container>
+      </ion-title>
+    </ion-toolbar>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HeroImageComponent } from './hero-image/hero-image.component';
 import { HowWorksComponent } from './how-works/how-works.component';
+import { FooterComponent } from 'src/app/components/core/footer/footer.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HowWorksComponent } from './how-works/how-works.component';
     IonicModule,
     HomePageRoutingModule,
     HeroImageComponent,
-    HowWorksComponent
+    HowWorksComponent,
+    FooterComponent
   ],
   declarations: [HomePage]
 })
