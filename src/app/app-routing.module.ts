@@ -8,9 +8,18 @@ const routes: Routes = [
     data: { title: 'Home' }
   },
   {
+    path: 'subscribe',
+    loadChildren: () => import('./pages/subscribe/subscribe.module').then( m => m.SubscribePageModule),
+    data: { title: 'Subscribe' }
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'subscribe',
+    loadChildren: () => import('./pages/subscribe/subscribe.module').then( m => m.SubscribePageModule)
   },
 ];
 

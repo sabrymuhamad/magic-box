@@ -1,7 +1,7 @@
 <section class="mag-bg-sectionBg">
-  <div class="mag-text-center mag-pt-28 mag-mb-20 mag-relative">
+  <div class="mag-text-center mag-pt-28 mag-mb-20 mag-relative max-sm:mag-pt-10">
     <p class="mag-font-semibold">Discover</p>
-    <div class="mag-max-w-[780px] mag-mx-auto">
+    <div class="mag-max-w-[780px] mag-mx-auto max-sm:mag-px-3">
       <h2 class="mag-font-bold mag-py-4">How It Works: Subscribe and Receive Your Surprise Box</h2>
       <h4>Subscribe to our surprise subscription box and give your child the gift of learning. Each month, we curate a
         box
@@ -9,8 +9,8 @@
     </div>
   </div>
 
-  <div class="mag-max-w-[1220px] mag-mx-auto mag-pb-[112px] mag-relative mag-z-10">
-    <ul class="mag-flex mag-gap-7">
+  <div class="mag-max-w-[1220px] mag-mx-auto mag-pb-[112px] mag-relative mag-z-10 max-sm:mag-pb-10 mag-px-2">
+    <ul class="mag-flex mag-gap-7 max-sm:mag-flex-col">
       @for (step of steps; track $index) {
       <li class="mag-text-center">
         <div
@@ -25,7 +25,7 @@
     </ul>
 
     <div class="mag-mt-12 mag-text-center">
-      <button class="btn">Subscribe Now</button>
+      <button routerLink="/subscribe" class="btn">Subscribe Now</button>
     </div>
   </div>
 

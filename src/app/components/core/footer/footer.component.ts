@@ -9,6 +9,6 @@ import { IonicModule } from '@ionic/angular';
 })
 export class FooterComponent{
 
-
+  year = new Date().getFullYear();
 
 }

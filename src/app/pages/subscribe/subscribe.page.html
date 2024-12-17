@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar></ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="mag-bg-[url('/assets/images/sub-bg.jpg')] mag-bg-no-repeat mag-bg-cover mag-py-28 max-sm:mag-py-14">
+
+    <div class="mag-mx-auto mag-max-w-[1024px] mag-flex mag-bg-white mag-rounded-2xl mag-shadow-lg mag-overflow-hidden max-sm:mag-flex-col">
+      <div class="mag-w-[70%] mag-p-8 max-sm:mag-w-full">
+        <h4 class="mag-font-bold">Subscribe</h4>
+        <p>to our Monthly Surprise Box</p>
+        <hr class="mag-my-4">
+        <app-subscribe-form></app-subscribe-form>
+      </div>
+
+      <div class="mag-w-[30%] mag-p-8 mag-bg-lightBg max-sm:mag-w-full">
+        <app-payment-summary></app-payment-summary>
+      </div>
+    </div>
+
+  </div>
+
+  <app-footer></app-footer>
+</ion-content>

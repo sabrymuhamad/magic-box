@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { filter, map } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonicModule, NgIf, AsyncPipe]
+  imports: [IonicModule, NgIf, AsyncPipe, RouterLink]
 })
 export class HeaderComponent {
   private route = inject(ActivatedRoute);

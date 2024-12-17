@@ -1,11 +1,13 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-how-works',
   templateUrl: './how-works.component.html',
   styleUrls: ['./how-works.component.scss'],
-  standalone: true
+  standalone: true,
+  imports: [RouterLink]
 })
 export class HowWorksComponent {
 

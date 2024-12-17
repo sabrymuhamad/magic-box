@@ -5,17 +5,67 @@
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
-
-    &::-webkit-scrollbar {
-        width: 6px !important;
-        background-color: #F5F5F5;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #000000;
-    }
 }
 
 ion-header {
     box-shadow: none !important;
+}
+
+.input-wrapper.sc-ion-input-md {
+    line-height: 18px !important;
+}
+
+
+ion-select::part(label) {
+    line-height: 18px !important;
+}
+
+
+.calendar-modal {
+    --width: 350px;
+    /* Set desired width */
+    --height: auto;
+    /* Optional: Adjust the height */
+    --border-radius: 12px;
+    /* Add rounded corners */
+    --background: var(--ion-color-light);
+    /* Background color */
+
+    /* Center the modal */
+    &::part(content) {
+        max-width: 350px;
+        /* Set max-width */
+        width: 100%;
+        margin: auto;
+    }
+}
+
+ion-select::part(icon) {
+    content: url('../assets/images/dd-arrow.svg');
+    /* Replace with your own custom SVG icon */
+}
+
+
+@media (min-width:1200px) {
+    ion-content::part(scroll) {
+        --webkit-scrollbar-width: 8px; /* Webkit scrollbar width */
+      }
+      
+      ion-content::part(scroll)::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ion-content::part(scroll)::-webkit-scrollbar-track {
+        background: rgba($color: #FFF, $alpha: .3); /* Scrollbar track color */
+      }
+      
+      ion-content::part(scroll)::-webkit-scrollbar-thumb {
+        background: var(--btn-text); /* Thumb color */
+        border-radius: 10px;
+      }
+      
+      ion-content::part(scroll)::-webkit-scrollbar-thumb:hover {
+        background: #0056b3; /* Thumb hover color */
+      }
+      
 }

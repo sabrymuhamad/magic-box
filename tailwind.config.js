@@ -9,7 +9,8 @@ module.exports = {
       colors: {
         primary: 'var(--ion-color-primary)',
         primaryDarker: 'var(--btn-text)',
-        sectionBg: 'var(--section-bg-color)'
+        sectionBg: 'var(--section-bg-color)',
+        lightBg: 'var(--light-primary-bg)'
       }
     },
   },

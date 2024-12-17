@@ -1,0 +1,65 @@
+<form (ngSubmit)="submit(subForm)" #subForm="ngForm">
+  <h4 class="mag-font-bold mag-mb-3">Contact Information</h4>
+
+  <ion-input class="mag-mb-6" label="Your name" [(ngModel)]="subscribeForm.yourName" name="yourName"
+    label-placement="floating" fill="outline" placeholder="e.g Osama Alshathri" required></ion-input>
+
+  <ion-input class="mag-mb-6" label="Email" [(ngModel)]="subscribeForm.email" name="email" [pattern]="emailRegex"
+    label-placement="floating" fill="outline" placeholder="Osama@gmail.com" required></ion-input>
+
+  <h4 class="mag-font-bold mag-mb-3 mag-mt-6">Child's Information</h4>
+
+  <ion-input class="mag-mb-6" label="Child's Full Name" [(ngModel)]="subscribeForm.childName" name="childName"
+    label-placement="floating" fill="outline" placeholder="e.g Sarah Mohammad" required></ion-input>
+
+  <ion-input (click)="openDateModal()" [(ngModel)]="subscribeForm.childDOB" name="selectedDate" class="mag-mb-6"
+    label="Child's Date of Birth" readonly="true" label-placement="floating" fill="outline" required
+    placeholder="e.g day/month/year"></ion-input>
+
+
+  <ion-select [(ngModel)]="subscribeForm.grade" name="grade" class="mag-mb-6" label="Grade" label-placement="floating"
+    fill="outline" required>
+    @for (grade of grades; track $index) {
+    <ion-select-option [value]="grade">{{grade}}</ion-select-option>
+    }
+    ion-icon
+  </ion-select>
+
+  <div class="mag-mb-6">
+    <p class="mag-mb-2 mag-font-bold">Gender</p>
+    <ion-radio-group [(ngModel)]="subscribeForm.gender" name="gender" class="mag-flex mag-gap-5">
+      @for (gender of genders; track $index) {
+      <ion-radio [value]="gender" class="mag-flex-1 mag-border mag-rounded-md mag-px-4 mag-py-3"
+        aria-label="Custom checkbox">{{gender}}</ion-radio>
+      }
+    </ion-radio-group>
+  </div>
+
+  <div>
+    <p class="mag-font-bold mag-mb-2">As a parent select any 3 topics
+      @if (!isValidTopics) {<small class="mag-text-red-500">At least 1 topic is required</small>}</p>
+    <ul class="mag-flex mag-gap-3">
+
+      @for (topic of topics; track $index) {
+      <li class="mag-border-2 mag-border-neutral-400 mag-rounded-3xl mag-overflow-hidden"
+        [ngClass]="{'mag-border-primaryDarker' : topic.selected}">
+        <input [(ngModel)]="topic.selected" hidden [name]="topic.name" [id]="topic.name" type="checkbox">
+        <label class="mag-text-neutral-400 mag-py-1 mag-px-5 mag-inline-block mag-cursor-pointer mag-transition-all"
+          [ngClass]="{'mag-text-primaryDarker mag-bg-lightBg' : topic.selected}"
+          [for]="topic.name">{{topic.name}}</label>
+      </li>
+      }
+    </ul>
+  </div>
+
+  <button class="btn mag-w-full mag-mt-24">Continue to payment</button>
+
+</form>
+
+<ion-modal #dateModal class="calendar-modal" [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime presentation="date" showDefaultButtons="true" [value]="subscribeForm.childDOB"
+      (ionChange)="onDateChange($event)" (ionCancel)="closeDateModal()" (ionConfirm)="confirmDate()">
+    </ion-datetime>
+  </ng-template>
+</ion-modal>

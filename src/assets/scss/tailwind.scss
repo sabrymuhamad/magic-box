@@ -30,7 +30,12 @@
 
 @layer components {
     .btn {
-        @apply mag-bg-white mag-rounded-3xl mag-px-6 mag-py-4 mag-font-bold mag-text-xl mag-text-primaryDarker;
+        @apply mag-bg-white mag-rounded-3xl mag-px-6 mag-py-4 mag-font-bold mag-text-xl mag-text-primaryDarker mag-border-primaryDarker mag-border-2 mag-border-solid mag-transition-all;
+        box-shadow: 3px 3px 1px var(--btn-text);
+
+        &:hover {
+            box-shadow: 0 0 0;
+        }
     }
 }
 
