@@ -14,6 +14,7 @@ import { Subscribe } from 'src/app/helpers/models/subscribe.model';
   providers: [DatePipe]
 })
 export class SubscribeFormComponent {
+  @ViewChild('subForm') subForm!: NgForm;
   @ViewChild('dateModal') dateModal!: IonModal;
   private datePipe = inject(DatePipe);
   subscribeForm = new Subscribe();
@@ -45,10 +46,10 @@ export class SubscribeFormComponent {
     this.dateModal.dismiss();
   }
 
-  submit(form: NgForm) {
-    form.form.markAllAsTouched();
+  submit() {
+    this.subForm.form.markAllAsTouched();
     this.isValidTopics = !!this.isTopicsSelected();
-    if (form.form.valid && this.isTopicsSelected()) {
+    if (this.subForm.form.valid && this.isTopicsSelected()) {
 
     }
   }

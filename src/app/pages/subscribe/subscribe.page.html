@@ -5,16 +5,17 @@
 <ion-content [fullscreen]="true">
   <div class="mag-bg-[url('/assets/images/sub-bg.jpg')] mag-bg-no-repeat mag-bg-cover mag-py-28 max-sm:mag-py-14">
 
-    <div class="mag-mx-auto mag-max-w-[1024px] mag-flex mag-bg-white mag-rounded-2xl mag-shadow-lg mag-overflow-hidden max-sm:mag-flex-col">
-      <div class="mag-w-[70%] mag-p-8 max-sm:mag-w-full">
+    <div class="mag-mx-auto mag-max-w-[1024px] mag-flex mag-bg-white mag-rounded-2xl mag-shadow-lg mag-overflow-hidden max-sm:mag-flex-col
+    max-sm:mag-mx-5 max-sm:mag-border max-sm:mag-border-neutral-300">
+      <div class="mag-w-[70%] mag-p-8 max-sm:mag-w-full max-sm:mag-p-4">
         <h4 class="mag-font-bold">Subscribe</h4>
         <p>to our Monthly Surprise Box</p>
         <hr class="mag-my-4">
-        <app-subscribe-form></app-subscribe-form>
+        <app-subscribe-form #submitForm></app-subscribe-form>
       </div>
 
-      <div class="mag-w-[30%] mag-p-8 mag-bg-lightBg max-sm:mag-w-full">
-        <app-payment-summary></app-payment-summary>
+      <div class="mag-w-[30%] mag-p-8 mag-bg-lightBg max-sm:mag-w-full max-sm:mag-p-6">
+        <app-payment-summary (submitForm)="submitForm.submit()"></app-payment-summary>
       </div>
     </div>
 

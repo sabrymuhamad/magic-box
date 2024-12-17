@@ -1,4 +1,4 @@
-<form (ngSubmit)="submit(subForm)" #subForm="ngForm">
+<form (ngSubmit)="submit()" #subForm="ngForm">
   <h4 class="mag-font-bold mag-mb-3">Contact Information</h4>
 
   <ion-input class="mag-mb-6" label="Your name" [(ngModel)]="subscribeForm.yourName" name="yourName"
@@ -38,7 +38,7 @@
   <div>
     <p class="mag-font-bold mag-mb-2">As a parent select any 3 topics
       @if (!isValidTopics) {<small class="mag-text-red-500">At least 1 topic is required</small>}</p>
-    <ul class="mag-flex mag-gap-3">
+    <ul class="mag-flex mag-gap-3 mag-flex-wrap">
 
       @for (topic of topics; track $index) {
       <li class="mag-border-2 mag-border-neutral-400 mag-rounded-3xl mag-overflow-hidden"
@@ -52,7 +52,7 @@
     </ul>
   </div>
 
-  <button class="btn mag-w-full mag-mt-24">Continue to payment</button>
+  <button class="btn mag-w-full mag-mt-24 max-sm:mag-hidden">Continue to payment</button>
 
 </form>
 
